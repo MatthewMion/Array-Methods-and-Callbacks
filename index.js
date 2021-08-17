@@ -49,15 +49,17 @@ Use the higher-order function called getYears to do the following:
 3. Return an array called years containing all of the years in the getFinals data set*/
 
 function getYears(array, getFinalscb) {
- const newArray = getFinalscb(array)
- const years = []
-  newArray.filter(function(item){
-     years.push(item.Year)
+ const finalsArray = getFinalscb(array)
+ const years = finalsArray.map(function(game){
+     return game.Year;
  })
     return years;
 
+// return getFinalscb(array).map(game => game.Year)
+        
+
 }
-console.log(getYears(fifaData,getFinals))
+// console.log(getYears(fifaData, getFinals))
 
 
 
@@ -67,10 +69,23 @@ Use the higher-order function getWinners to do the following:
 2. Receives the callback function getFinals from task 2 
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
+//probably use .map() over the getFinals and return the winners using a conditional.
+//dont worry about ties or overtime, just return winner based on the points scored in the game.
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(array, getFinalscb) {
+    const finalsArray = getFinalscb(array);
+    const winnersArray=[]
+    for(let i = 0; i < finalsArray.length; i++){
+        if(finalsArray[i]['Home Team Goals'] > finalsArray[i]['Away Team Goals']){
+           winnersArray.push(finalsArray[i]['Home Team Name'])
+        } else {
+           winnersArray.push(finalsArray[i]['Away Team Name'])
+        }
+    }
+    
+    return winnersArray;
 }
+// console.log(getWinners(fifaData,getFinals))
 
 
 
@@ -80,12 +95,14 @@ Use the higher-order function getWinnersByYear to do the following:
 2. Receive a callback function getYears from task 3
 3. Receive a callback function getWinners from task 4
 4. Return an array of strings that say "In {year}, {country} won the world cup!" 
-
 hint: the strings returned need to exactly match the string in step 4.
  */
-
+// 3 params, getYearscb, getWinnerscb
 function getWinnersByYear(/* code here */) {
     /* code here */
+    //store the result in a variable.
+    //probably use .map with item and index.
+    // map over winners, use index to refer to the year and use item to refer to the current value in winenrs.
 }
 
 
