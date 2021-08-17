@@ -7,22 +7,22 @@ Practice accessing data by console.log-ing the following pieces of data note, yo
 const get2014 = fifaData.filter(function(item){
     return item.Year === 2014 && item.Stage === 'Final' 
 })
-console.log(get2014)
-//(a) Home Team name for 2014 world cup final
-const homeTeamNameFinals = get2014[0]['Home Team Name']
-console.log(homeTeamNameFinals);
-//(b) Away Team name for 2014 world cup final
-const awayTeamNameFinals = get2014[0]['Away Team Name']
-console.log(awayTeamNameFinals);
-//(c) Home Team goals for 2014 world cup final
-const homeTeamGoalsFinal = get2014[0]['Home Team Goals']
-console.log(homeTeamGoalsFinal)
-//(d) Away Team goals for 2014 world cup final
-const awayTeamGoalsFinal = get2014[0]['Away Team Goals']
-console.log(awayTeamGoalsFinal)
-//(e) Winner of 2014 world cup final */
-const winnerFinal = get2014[0]['Win conditions']
-console.log(winnerFinal)
+// console.log(get2014)
+// //(a) Home Team name for 2014 world cup final
+// const homeTeamNameFinals = get2014[0]['Home Team Name']
+// console.log(homeTeamNameFinals);
+// //(b) Away Team name for 2014 world cup final
+// const awayTeamNameFinals = get2014[0]['Away Team Name']
+// console.log(awayTeamNameFinals);
+// //(c) Home Team goals for 2014 world cup final
+// const homeTeamGoalsFinal = get2014[0]['Home Team Goals']
+// console.log(homeTeamGoalsFinal)
+// //(d) Away Team goals for 2014 world cup final
+// const awayTeamGoalsFinal = get2014[0]['Away Team Goals']
+// console.log(awayTeamGoalsFinal)
+// //(e) Winner of 2014 world cup final */
+// const winnerFinal = get2014[0]['Win conditions']
+// console.log(winnerFinal)
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -98,12 +98,20 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 // 3 params, getYearscb, getWinnerscb
-function getWinnersByYear(/* code here */) {
-    /* code here */
-    //store the result in a variable.
-    //probably use .map with item and index.
-    // map over winners, use index to refer to the year and use item to refer to the current value in winenrs.
+function getWinnersByYear(array, getYearscb, getWinnerscb) {
+    const yearsArray = getYearscb(array, getFinals);
+    const winnersArray= getWinnerscb();
+    const winnersByYear = yearsArray.map(function(year, index){
+            return `In ${year}, ${winnersArray[index]} won the world cup!`
+    })
+        // const winnersByYear = [];
+        // for(let i = 0; i < yearsArray.length;i++){
+        //      winnersByYear.push(`In ${yearsArray[i]}, ${winnersArray[i]} won the world cup!`);
+        // }
+
+    return winnersByYear;
 }
+// console.log(getWinnersByYear(fifaData, getYears, getWinners))
 
 
 
@@ -117,8 +125,14 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(finalArray) {
+   const scoreArray = finalArray.reduce((accumulator, currentValue) => {
+      return  accumulator + currentValue['Home Team Goals'] + currentValue['Away Team Goals']}, 0)/finalArray.length
+
+      return scoreArray.toFixed(2);
+
+//    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+//     console.log(scoreArray.reduce(reducer, 0))
 }
 
 
